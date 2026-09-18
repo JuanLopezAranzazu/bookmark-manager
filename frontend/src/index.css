@@ -1,1 +1,25 @@
-@import "tailwindcss";
+@layer theme, base, mantine, components, utilities;
+
+@import 'tailwindcss';
+@import '@mantine/core/styles.layer.css';
+@import '@mantine/notifications/styles.layer.css';
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: 'Inter Tight', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.board-surface {
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--mantine-color-gray-3) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+[data-mantine-color-scheme='dark'] .board-surface {
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--mantine-color-dark-5) 1px, transparent 0);
+}
