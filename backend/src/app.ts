@@ -4,6 +4,7 @@ import { ZodError } from 'zod';
 import { env } from './env.js';
 import authPlugin from './plugins/auth.js';
 import authRoutes from './routes/auth.js';
+import bookmarkRoutes from './routes/bookmarks.js';
 import tagRoutes from './routes/tags.js';
 import { HttpError } from './lib/errors.js';
 
@@ -38,6 +39,7 @@ export async function buildApp() {
 
   await app.register(async (api) => {
     await api.register(authRoutes);
+    await api.register(bookmarkRoutes);
     await api.register(tagRoutes);
   }, { prefix: '/api' });
 
