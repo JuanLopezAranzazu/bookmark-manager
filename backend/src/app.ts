@@ -3,6 +3,7 @@ import cors from '@fastify/cors';
 import { ZodError } from 'zod';
 import { env } from './env.js';
 import authPlugin from './plugins/auth.js';
+import authRoutes from './routes/auth.js';
 import { HttpError } from './lib/errors.js';
 
 export async function buildApp() {
@@ -35,7 +36,7 @@ export async function buildApp() {
   app.get('/health', async () => ({ status: 'ok' }));
 
   await app.register(async (api) => {
-
+    await api.register(authRoutes);
   }, { prefix: '/api' });
 
   return app;
