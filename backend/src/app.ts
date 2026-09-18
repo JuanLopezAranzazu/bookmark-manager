@@ -2,6 +2,7 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import { ZodError } from 'zod';
 import { env } from './env.js';
+import authPlugin from './plugins/auth.js';
 import { HttpError } from './lib/errors.js';
 
 export async function buildApp() {
@@ -12,6 +13,7 @@ export async function buildApp() {
   });
 
   await app.register(cors, { origin: env.WEB_URL, credentials: true });
+  await app.register(authPlugin);
 
   app.setErrorHandler((error, request, reply) => {
     if (error instanceof ZodError) {
