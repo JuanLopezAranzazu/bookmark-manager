@@ -1,11 +1,13 @@
 import { buildApp } from './app.js';
 import { env } from './env.js';
+import { prisma } from './lib/prisma.js';
 
 const app = await buildApp();
 
 const shutdown = async (signal: string) => {
   app.log.info(`${signal} recibido, cerrando`);
   await app.close();
+  await prisma.$disconnect();
   process.exit(0);
 };
 
